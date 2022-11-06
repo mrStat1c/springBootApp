@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Motocycles</title>
+</head>
+
+<body>
+
+<p><b>Motocycle data:</b></p>
+<p th:text="'Model: ' + ${moto.getModel()}"></p>
+<p th:text="'Vin: ' + ${moto.getVin()}"></p>
+<p th:text="'Release year: ' + ${moto.getReleaseYear()}"></p>
+<p th:text="'Weight: ' + ${moto.getWeight()}"></p>
+<p th:text="'Power: ' + ${moto.getPower()}"></p>
+<p th:text="'Type: ' + ${moto.getMotoType()}" th:if="${moto.getMotoType() != NULL}"></p>
+
+<div th:if="${customer}">
+    <b><p th:text="'Rented by: ' + ${customer.getName()}"></p></b>
+    <form th:method="PATCH" th:action="@{/moto/{id}/release(id=${moto.getId()})}">
+        <input type="submit" value="Release"/>
+    </form>
+</div>
+
+<div th:if="${customers}">
+    <b><p th:text="'Free for rent'"></p></b>
+    <form th:method="PATCH" th:action="@{/moto/{id}/assign(id=${moto.getId()})}">
+        <label for="customer">Choose customer:</label>
+        <!--по кнопке на /moto/{id}/assign отправится объект renter-->
+        <select id="customer" th:object="${renter}" th:field="*{id}">
+            <option th:each="customer: ${customers}" th:value="${customer.getId()}" th:text="${customer.getName()}">
+            </option>
+        </select>
+        <input type="submit" value="Assign"/>
+    </form>
+</div>
+
+<form th:method="GET" th:action="@{/moto/{id}/update(id=${moto.getId()})}">
+    <input type="submit" th:value="Update">
+</form>
+
+<form th:method="DELETE" th:action="@{/moto/{id}(id=${moto.getId()})}" th:if="${customers}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<div th:if="${customer}" style="color:green">
+    <p>It's not possible to delete a rented motocyle</p>
+</div>
+
+<br>
+<hr>
+<p><a href="/customers/">Customers</a></p>
+<p><a href="/moto/">Motocycles</a></p>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+
+<body>
+
+<form th:method="GET" th:action="@{/customers/index}">
+    <label for="namePart">Enter name part:</label>
+    <input type="text" id="namePart" name="namePart"/>
+    <input type="submit" value="Search">
+</form>
+
+<p><b>Customers:</b></p>
+<div th:each="customer : ${customers}">
+    <a th:href="@{/customers/{id}(id=${customer.getId()})}"
+       th:text="${customer.getName() + ', ' + customer.getDriverLicenseNumber()}"></a>
+</div>
+<div th:if="${customers.isEmpty()}">
+    <span>Customers not found!</span>
+</div>
+<br>
+<hr>
+<a href="/customers/create">Create new customer</a>
+
+<br>
+<hr>
+<p><a href="/customers/">Customers</a></p>
+<p><a href="/moto/">Motocycles</a></p>
+
+
+</body>
+</html>

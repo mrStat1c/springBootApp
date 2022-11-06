@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update customer</title>
+</head>
+<body>
+
+<p><b>Customer update:</b></p>
+<form th:method="PATCH" th:action="@{/customers/{id}(id=${customer.getId()})}" th:object="${customer}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}">
+    </div>
+    <br>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('age')}"
+         th:errors="*{age}">
+    </div>
+    <br>
+    <label for="birthDate">Enter birthDate (dd.mm.yyyy):</label>
+    <input type="text" th:field="*{birthDate}" id="birthDate"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('birthDate')}"
+         th:errors="*{birthDate}">
+    </div>
+    <br>
+    <label for="driveExperience">Enter drive experience: </label>
+    <input type="text" th:field="*{driveExperience}" id="driveExperience"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('driveExperience')}"
+         th:errors="*{driveExperience}">
+    </div>
+    <br>
+    <label for="driverLicenseNumber">Enter driver license number: </label>
+    <input type="text" th:field="*{driverLicenseNumber}" id="driverLicenseNumber"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('driverLicenseNumber')}"
+         th:errors="*{driverLicenseNumber}">
+    </div>
+    <br>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('email')}"
+         th:errors="*{email}">
+    </div>
+    <br>
+    <label for="phoneNumber">Enter phone number: </label>
+    <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('phoneNumber')}"
+         th:errors="*{phoneNumber}">
+    </div>
+    <br>
+    <input type="submit" value="Update">
+
+</form>
+
+<br>
+<hr>
+<p><a href="/customers/">Customers</a></p>
+<p><a href="/moto/">Motocycles</a></p>
+
+</body>
+</html>

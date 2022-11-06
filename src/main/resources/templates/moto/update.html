@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update motocycle</title>
+</head>
+<body>
+
+<p><b>Motocycle update:</b></p>
+<form th:method="PATCH" th:action="@{/moto/{id}(id=${moto.getId()})}" th:object="${moto}">
+    <label for="model">Enter model: </label>
+    <input type="text" th:field="*{model}" id="model"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('model')}"
+         th:errors="*{model}">
+    </div>
+    <br>
+    <label for="vin">Enter vin: </label>
+    <input type="text" th:field="*{vin}" id="vin"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('vin')}"
+         th:errors="*{vin}">
+    </div>
+    <br>
+    <label for="releaseYear">Enter release year: </label>
+    <input type="text" th:field="*{releaseYear}" id="releaseYear"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('releaseYear')}"
+         th:errors="*{releaseYear}">
+    </div>
+    <br>
+    <label for="weight">Enter weight: </label>
+    <input type="text" th:field="*{weight}" id="weight"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('weight')}"
+         th:errors="*{weight}">
+    </div>
+    <br>
+    <label for="power">Enter power: </label>
+    <input type="text" th:field="*{power}" id="power"/>
+    <div style="color:red"
+         th:if="${#fields.hasErrors('power')}"
+         th:errors="*{power}">
+    </div>
+    <br>
+    <label for="type">Enter type: </label>
+    <select id="type" th:field="*{motoType}">
+        <option th:each="motoType : ${T(ru.amelin.springBoot.models.MotoType).values()}"
+                th:value="${motoType}" th:text="${motoType}"></option>
+    </select>
+    <br>
+    <input type="submit" value="Update">
+
+</form>
+
+<br>
+<hr>
+<p><a href="/customers/">Customers</a></p>
+<p><a href="/moto/">Motocycles</a></p>
+
+</body>
+</html>

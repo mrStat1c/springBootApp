@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+</head>
+
+<body>
+
+<p><b>Customer data:</b></p>
+<p th:text="'Name: ' + ${customer.getName()}"></p>
+<p th:text="'Age: ' + ${customer.getAge()}" th:if="${customer.getAge() != NULL}"></p>
+<p th:text="'Drive experience: ' + ${customer.getDriveExperience()}"
+   th:if="${customer.getDriveExperience() != NULL}"></p>
+<p th:text="'Driver license number: ' + ${customer.getDriverLicenseNumber()}"></p>
+<p th:text="'Email: ' + ${customer.getEmail()}" th:if="${customer.getEmail() != NULL}"></p>
+<p th:text="'Phone number: ' + ${customer.getPhoneNumber()}"></p>
+
+<p><b>Rented motocycles:</b></p>
+
+<div th:if="${motoList.isEmpty()}">
+    <p>No rented motorcycles</p>
+</div>
+
+<div th:each="moto : ${motoList}" th:if="${!motoList.isEmpty()}">
+    <p th:text="${moto.getModel() + ', ' + moto.getVin()}"></p>
+</div>
+
+<a th:href="@{/customers/{id}/update(id=${customer.getId()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/customers/{id}(id=${customer.getId()})}" th:if="${motoList.isEmpty()}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<div th:if="${!motoList.isEmpty()}" style="color:green">
+    <p>It's not possible to delete a person with a rented motorcycle</p>
+</div>
+
+<br>
+<hr>
+<p><a href="/customers/">Customers</a></p>
+<p><a href="/moto/">Motocycles</a></p>
+
+</body>
+</html>
