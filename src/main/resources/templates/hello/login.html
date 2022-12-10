@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+</head>
+<body>
+
+<!--название полей для Spring Security должны быть именно username и password-->
+<form name="f" method="post" action="/process_login">
+
+<!-- CSRF токен нужно добавить только в эту форму, во все остальные формы он добавится автоматически    -->
+   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+    <label for="username">Введите логин:</label>
+    <input type="text" name="username" id="username"/>
+    <br/>
+    <label for="password">Введите пароль:</label>
+    <input type="password" name="password" id="password"/>
+    <br/>
+    <input type="submit" value="Login"/>
+
+    <div th:if="${param.error}" style="color:red">
+        Неправильное имя или пароль
+    </div>
+
+</form>
+
+
+</body>
+</html>

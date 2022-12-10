@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration page</title>
+</head>
+<body>
+
+<form  th:method="POST" th:action="@{/hello/registration}" th:object="${user}">
+    <label for="username">Введите имя пользователя:</label>
+    <input type="text" th:field="*{name}" id="username"/>
+    <br/>
+    <label for="birthYear">Введите год рождения:</label>
+    <input type="text" th:field="*{birthYear}" id="birthYear"/>
+    <br/>
+    <label for="password">Введите пароль:</label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <br/>
+    <input type="submit" value="Create"/>
+
+    <div th:if="${param.error}" style="color:red">
+        Неправильное имя или пароль
+    </div>
+
+</form>
+
+
+</body>
+</html>
